@@ -1,0 +1,23 @@
+name: Getter
+
+on:
+  workflow_dispatch:
+
+jobs :
+  build:
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - name: Requirements
+        run: sudo apt-get install p7zip-full
+      - name : Get OS
+        run: wget http://gfs206n300.userstorage.mega.co.nz/dl/sTuyQiNzJkdigAL7iBmWvm0L7UF_ATB9aO_fsasb9ldWwrzwwcw_hCFB_Zi9fzZsZptGVO667Gj3tCB5IkYBmEZYsJmtLUGE3qRTKCVnnjNHP0mpvmirUCAtyYiRDA
+      - name: Rename
+        run: mv sTuyQiNzJkdigAL7iBmWvm0L7UF_ATB9aO_fsasb9ldWwrzwwcw_hCFB_Zi9fzZsZptGVO667Gj3tCB5IkYBmEZYsJmtLUGE3qRTKCVnnjNHP0mpvmirUCAtyYiRDA 21996.1.210529-1541.co_release_CLIENT_CONSUMER_x64FRE_en-us.iso
+      - name : Compress OS
+        run: 7z a 7z.7z 21996.1.210529-1541.co_release_CLIENT_CONSUMER_x64FRE_en-us.iso
+      - name: Send ready-to-go 7z iso
+        uses: actions/upload-artifact@v2
+        with:
+          name: iso
+          path: 7z.7z
